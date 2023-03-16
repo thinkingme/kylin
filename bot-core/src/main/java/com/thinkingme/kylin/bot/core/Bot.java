@@ -134,7 +134,7 @@ public class Bot {
         return (JSONArray) object;
     }
 
-    public void flushFriends() {
+    public void flushFriends() throws Exception {
         log.debug(String.format("[%s]正在刷新好友列表.", this.botName));
         ApiResult apiResult = this.botClient.invokeApi(new GetFriends(), this);
         JSONArray resultArray = this.getArray(apiResult.getData());
@@ -148,7 +148,7 @@ public class Bot {
         log.debug(String.format("[%s]刷新好友列表完成,共有好友%d个.", this.botName, this.friends.size()));
     }
 
-    public Collection<Group> flushGroups() {
+    public Collection<Group> flushGroups() throws Exception {
         log.debug(String.format("[%s]正在刷新群列表.", this.botName));
         ApiResult apiResult = this.botClient.invokeApi(new GetGroups(), this);
         JSONArray resultArray = this.getArray(apiResult.getData());
@@ -162,7 +162,7 @@ public class Bot {
         return this.groups.values();
     }
 
-    public void flushGroupMembers(Group group) {
+    public void flushGroupMembers(Group group) throws Exception {
         ApiResult apiResult = this.botClient.invokeApi(new GetGroupMembers(group.getGroupId()), this);
         JSONArray resultArray = this.getArray(apiResult.getData());
         Map<Long, Member> members = this.groupMembers.computeIfAbsent(group.getGroupId(), key -> new ConcurrentHashMap<>());
@@ -313,55 +313,55 @@ public class Bot {
         }
     }
 
-    public int sendGroupMessage(long groupId, MessageChain messageChain) {
+    public int sendGroupMessage(long groupId, MessageChain messageChain) throws Exception {
         ApiResult apiResult = this.botClient.invokeApi(new SendGroupMsg(groupId, messageChain), this);
         return this.getObject(apiResult.getData()).getIntValue("message_id");
     }
 
-    public int sendGroupForwardMessage(long groupId, List<ForwardNodeMessage> messageList) {
+    public int sendGroupForwardMessage(long groupId, List<ForwardNodeMessage> messageList) throws Exception {
         ApiResult apiResult = this.botClient.invokeApi(new SendGroupForwardMsg(groupId, messageList), this);
         return this.getObject(apiResult.getData()).getIntValue("message_id");
     }
 
-    public int sendTempMessage(long userId, long groupId, MessageChain messageChain) {
+    public int sendTempMessage(long userId, long groupId, MessageChain messageChain) throws Exception {
         ApiResult apiResult = this.botClient.invokeApi(new SendTempMsg(userId, groupId, messageChain), this);
         return this.getObject(apiResult.getData()).getIntValue("message_id");
     }
 
-    public void groupBan(long groupId) {
+    public void groupBan(long groupId) throws Exception {
         this.botClient.invokeApi(new GroupBan(groupId, true), this);
     }
 
-    public void groupPardon(long groupId) {
+    public void groupPardon(long groupId) throws Exception {
         this.botClient.invokeApi(new GroupBan(groupId, false), this);
     }
 
-    public void memberBan(long groupId, long userId, long duration) {
+    public void memberBan(long groupId, long userId, long duration) throws Exception {
         this.botClient.invokeApi(new Ban(groupId, userId, duration), this);
     }
 
-    public void memberPardon(long groupId, long userId) {
+    public void memberPardon(long groupId, long userId) throws Exception {
         this.botClient.invokeApi(new Ban(groupId, userId, 0), this);
     }
 
-    public int sendPrivateMessage(long userId, MessageChain messageChain) {
+    public int sendPrivateMessage(long userId, MessageChain messageChain) throws Exception {
         ApiResult apiResult = this.botClient.invokeApi(new SendPrivateMsg(userId, messageChain), this);
         return this.getObject(apiResult.getData()).getIntValue("message_id");
     }
 
-    public void deleteMsg(long messageId) {
+    public void deleteMsg(long messageId) throws Exception {
         this.botClient.invokeApi(new DeleteMsg(messageId), this);
     }
 
-    public void setGroupCard(long groupId, long userId, String card) {
+    public void setGroupCard(long groupId, long userId, String card) throws Exception {
         this.botClient.invokeApi(new SetGroupCard(groupId, userId, card), this);
     }
 
-    public void setGroupSpecialTitle(long userId, String specialTitle, Number duration, long groupId) {
+    public void setGroupSpecialTitle(long userId, String specialTitle, Number duration, long groupId) throws Exception {
         this.botClient.invokeApi(new SetGroupSpecialTitle(userId, specialTitle, duration, groupId), this);
     }
 
-    public void flushBotInfo() {
+    public void flushBotInfo() throws Exception {
         ApiResult apiResult = this.botClient.invokeApi(new GetLoginInfo(), this);
         JSONObject jsonObject = this.getObject(apiResult.getData());
         this.botId = jsonObject.getLongValue("user_id");

@@ -12,7 +12,9 @@ import com.thinkingme.kylin.jdqinglong.bean.QLToken;
 import javafx.scene.input.DataFormat;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.datetime.joda.LocalDateTimeParser;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by yangxg on 2021/10/12
@@ -36,6 +39,12 @@ public class ScheduleService {
     List<QLConfig> qlConfigs;
     @Autowired
     QingLongService qingLongService;
+    @Autowired
+    EmailService emailService;
+    @Value("${spring.mail.username}")
+    private String to;
+
+    private AtomicBoolean isFirst = new AtomicBoolean(true);
 
 
 
@@ -55,9 +64,9 @@ public class ScheduleService {
      * 通知京东cookie失效
      */
     @Scheduled(cron = "0 0 10 * * ?")
-    @SneakyThrows
     public void notifyJDCookieDisable() {
         log.info("开始检查失效的京东cookie");
+        isFirst.set(true);
         if (qlConfigs != null) {
             for (QLConfig qlConfig : qlConfigs) {
                 JSONArray jd_cookie = qingLongService.getQingLongEnv(qlConfig, "JD_COOKIE");
@@ -73,12 +82,30 @@ public class ScheduleService {
                         if(betweenDays>=3){
                             continue;
                         }
-                        JDCookie jdCookie = JDCookie.parse(value);
+
+
+                        JDCookie jdCookie = null;
+                        try {
+                            jdCookie = JDCookie.parse(value);
+                        } catch (Exception e) {
+                            log.error("jdcookie解析失败",e);
+                            continue;
+                        }
                         if(status.equals(1)&&remarks!=null){
                             Bot bot = BotFactory.getBots().get(3214890695L);
-                            bot.sendPrivateMessage(remarks,new MessageChain(){{
-                                add(new TextMessage("账号："+jdCookie.getPtPin()+"过期，请重新获取！"));
-                            }});
+                            JDCookie finalJdCookie = jdCookie;
+                            try {
+                                int message = bot.sendPrivateMessage(remarks, new MessageChain() {{
+                                    add(new TextMessage("账号：" + finalJdCookie.getPtPin() + "过期，请重新获取！"));
+                                }});
+                            } catch (Exception e) {
+                                //通过邮件通知管理员
+                                if(isFirst.get()){
+                                    emailService.sendMail(to,"发送qq消息失败！","请检查服务是否正常！");
+                                    isFirst.set(false);
+                                }
+                                log.error("发送qq消息失败",e);
+                            }
                         }
                     }
                 }

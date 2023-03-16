@@ -33,7 +33,7 @@ public class Group implements Contact {
     }
 
     @Override
-    public int sendMessage(MessageChain messageChain) {
+    public int sendMessage(MessageChain messageChain) throws Exception {
         return this.bot.sendGroupMessage(this.groupId, messageChain);
     }
 
@@ -41,19 +41,19 @@ public class Group implements Contact {
         return this.getMember(userId).sendMessage(messageChain);
     }
 
-    public int sendGroupForwardMessage(List<ForwardNodeMessage> messageList) {
+    public int sendGroupForwardMessage(List<ForwardNodeMessage> messageList) throws Exception {
         return this.bot.sendGroupForwardMessage(this.groupId, messageList);
     }
 
-    public void groupBan() {
+    public void groupBan() throws Exception {
         this.bot.groupBan(this.groupId);
     }
 
-    public void groupPardon() {
+    public void groupPardon() throws Exception {
         this.bot.groupPardon(this.groupId);
     }
 
-    public void setGroupSpecialTitle(long userId, String specialTitle, Number duration) {
+    public void setGroupSpecialTitle(long userId, String specialTitle, Number duration) throws Exception {
         this.bot.setGroupSpecialTitle(userId, specialTitle, duration, this.groupId);
     }
 }

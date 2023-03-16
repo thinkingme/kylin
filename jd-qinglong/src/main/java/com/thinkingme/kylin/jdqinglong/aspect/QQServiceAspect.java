@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class QQServiceAspect {
 
     @Around("execution(public !static * com.thinkingme.kylin.jdqinglong.service.QQService.*(*)) && args(friend)")
-    public Object aroundE(ProceedingJoinPoint pj, Friend friend){
+    public Object aroundE(ProceedingJoinPoint pj, Friend friend) throws Exception {
         Object proceed = null;
         try {
             proceed = pj.proceed();

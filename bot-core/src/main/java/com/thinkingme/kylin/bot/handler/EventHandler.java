@@ -9,6 +9,6 @@ import com.thinkingme.kylin.bot.core.Bot;
  */
 public interface EventHandler {
 
-    void handle(JSONObject jsonObject, Bot bot);
+    void handle(JSONObject jsonObject, Bot bot) throws Exception;
 
 }

@@ -41,6 +41,7 @@ public class BotDispatcher {
                     ApiResult apiResult = JSON.parseObject(message, ApiResult.class);
                     CompletableFuture<ApiResult> completableFuture = WsBotClient.getCompletableFutureMap().get(apiResult.getEcho());
                     if (completableFuture != null) {
+                        //返回异步事件
                         completableFuture.complete(apiResult);
                     }
                 } catch (Exception e) {

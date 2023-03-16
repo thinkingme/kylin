@@ -9,12 +9,12 @@ import com.thinkingme.kylin.bot.message.MessageChain;
  */
 public interface Contact {
 
-    default int sendMessage(Message message) {
+    default int sendMessage(Message message) throws Exception {
         MessageChain messageChain = new MessageChain();
         messageChain.add(message);
         return this.sendMessage(messageChain);
     }
 
-    int sendMessage(MessageChain messageChain);
+    int sendMessage(MessageChain messageChain) throws Exception;
 
 }

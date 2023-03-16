@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 public class PrivateMessageEventHandler implements EventHandler {
     @Override
-    public void handle(JSONObject jsonObject, Bot bot) {
+    public void handle(JSONObject jsonObject, Bot bot) throws Exception {
         if (!PrivateMessageEvent.isSupport(jsonObject)) {
             return;
         }

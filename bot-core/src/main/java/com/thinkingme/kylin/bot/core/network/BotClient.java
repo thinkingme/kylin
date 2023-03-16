@@ -10,7 +10,7 @@ import com.thinkingme.kylin.bot.core.Bot;
  */
 public interface BotClient {
 
-    ApiResult invokeApi(BaseApi baseApi, Bot bot);
+    ApiResult invokeApi(BaseApi baseApi, Bot bot) throws Exception;
 
     void heartbeat();
 

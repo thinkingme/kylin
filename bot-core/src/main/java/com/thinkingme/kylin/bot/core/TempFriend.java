@@ -21,7 +21,7 @@ public class TempFriend implements Contact {
     }
 
     @Override
-    public int sendMessage(MessageChain messageChain) {
+    public int sendMessage(MessageChain messageChain) throws Exception {
         return this.bot.sendPrivateMessage(this.userId, messageChain);
     }
 

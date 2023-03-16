@@ -53,16 +53,16 @@ public class Member implements Contact {
         return StringUtils.isEmpty(this.card) ? this.nickname : this.card;
     }
 
-    public void setCard(String card) {
+    public void setCard(String card) throws Exception {
         this.bot.setGroupCard(this.groupId, this.userId, card);
         this.card = card;
     }
 
-    public void ban(long duration) {
+    public void ban(long duration) throws Exception {
         this.bot.memberBan(this.groupId, this.userId, duration);
     }
 
-    public void pardon() {
+    public void pardon() throws Exception {
         this.bot.memberPardon(this.groupId, this.userId);
     }
 

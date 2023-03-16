@@ -46,7 +46,7 @@ public class WsBotClient implements BotClient {
     }
 
     @Override
-    public ApiResult invokeApi(BaseApi baseApi, Bot bot) {
+    public ApiResult invokeApi(BaseApi baseApi, Bot bot) throws Exception {
         this.lock.lock();
         try {
             if (baseApi.needSleep() && System.currentTimeMillis() - lastInvokeTime < 1500) {

@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>kylin-bom</module>
+        <module>kylin-utils</module>
     </modules>
 
     <properties>

@@ -33,6 +33,7 @@ public class QQService {
 
 
     @FriendMessageHandler
+    @SneakyThrows
     public void friendMessageHandler(Friend friend, MessageChain messageChain, String message,Integer id){
         log.info("收到好友消息【{}】:【{}】",friend.getNickname(),message);
         JSONObject jsonObject = null;
@@ -54,6 +55,7 @@ public class QQService {
         }
     }
     @TempMessageHandler
+    @SneakyThrows
     public void tempFriendMessageHandler(TempFriend friend, MessageChain messageChain, String message, Integer id){
         log.info("收到临时会话消息【{}】:【{}】",friend.getUserId(),message);
         JSONObject jsonObject = null;

@@ -26,7 +26,7 @@ public class FlushCacheScheduled {
     }
 
 
-    public synchronized void flushFriends() {
+    public synchronized void flushFriends() throws Exception {
         Collection<Bot> bots = BotFactory.getBots().values();
         if (bots.isEmpty()) {
             return;
@@ -36,7 +36,7 @@ public class FlushCacheScheduled {
         }
     }
 
-    public synchronized void flushGroups() {
+    public synchronized void flushGroups() throws Exception {
         Collection<Bot> bots = BotFactory.getBots().values();
         if (bots.isEmpty()) {
             return;
