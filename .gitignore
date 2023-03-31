@@ -27,3 +27,5 @@ buildNumber.properties
 /devLog/
 /.idea/
 /logs/
+/jd-qinglong/src/main/resources/application-debuglocal.yml
+/jd-qinglong/src/main/resources/application-debugremote.yml
