@@ -43,6 +43,10 @@ bot:
   #go-cqhttp配置中的access_token
   accessToken: 'xxxx'
 
+# chatGpt apikey https://platform.openai.com/account/api-key 这里获取
+chatGpt:
+  apiKey: xxx
+
 env:
   path: classpath:/env.properties
 

@@ -1,10 +1,6 @@
 package com.thinkingme.kylin.jdqinglong.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -17,9 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class TestController {
 
-    @RequestMapping("/test")
-    public String testCon(HttpServletRequest request){
-        request.getSession();
-        return "111";
-    }
+//    @Autowired
+//    QQService qqService;
+//
+//    @RequestMapping("/test")
+//    public String testCon(HttpServletRequest request) throws Exception {
+//        request.getSession();
+//        qqService.test();
+//        return "111";
+//    }
+//
+//    public String test() throws Exception {
+//        throw new Exception("5456");
+//    }
+//
+//    @Override
+//    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+//        applicationContext.getApplicationName();
+//    }
 }

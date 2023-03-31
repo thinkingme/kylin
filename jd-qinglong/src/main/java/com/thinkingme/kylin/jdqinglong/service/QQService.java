@@ -30,6 +30,8 @@ public class QQService {
     QingLongService qingLongService;
     @Autowired
     ScheduleService scheduleService;
+    @Autowired
+    ChatGptService chatGptService;
 
 
     @FriendMessageHandler
@@ -51,8 +53,13 @@ public class QQService {
                 friend.sendMessage(new TextMessage("上传失败！"));
             }
         }else{
-            friend.sendMessage(new TextMessage("你干嘛~ 哎呦！"));
+            chatGptService.sendMessage(message,friend);
+//            friend.sendMessage(new TextMessage("你干嘛~ 哎呦！"));
         }
+    }
+
+    public String test() throws Exception {
+        throw new Exception("5456");
     }
     @TempMessageHandler
     @SneakyThrows

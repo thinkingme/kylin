@@ -12,7 +12,7 @@
     <artifactId>kylin-common</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>kylin-bom</module>
+        <module>kylin-dependencies</module>
         <module>kylin-utils</module>
     </modules>
 

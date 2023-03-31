@@ -23,6 +23,6 @@ public class HeartbeatEventHandler implements EventHandler {
         }
         bot.getBotClient().heartbeat();
         HeartbeatEvent heartbeatEvent = jsonObject.toJavaObject(HeartbeatEvent.class);
-        log.debug("heartbeat-event: " + heartbeatEvent);
+//        log.debug("heartbeat-event: " + heartbeatEvent);
     }
 }

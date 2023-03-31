@@ -145,7 +145,7 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
         return handlerMethodList.stream().filter(predicate).collect(Collectors.toSet());
     }
 
-    public static List<Object> handleMethod(Bot bot, BaseEvent event, Predicate<? super HandlerMethod> predicate, String objectInjectorType) {
+    public static List<Object> handleMethod(Bot bot, BaseEvent event, Predicate<? super HandlerMethod> predicate, String objectInjectorType) throws InvocationTargetException, IllegalAccessException {
         List<Object> resultList = new ArrayList<>();
         Set<HandlerMethod> handlerMethodSet = getHandlerMethodListByAnnotation(predicate);
         for (HandlerMethod handlerMethod : handlerMethodSet) {
@@ -172,7 +172,7 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
                 } else {
                     log.error(cause.getMessage(), cause);
                 }
-                return new ArrayList<>();
+                throw e;
             }
         }
         return resultList;

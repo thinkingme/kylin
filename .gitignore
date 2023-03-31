@@ -29,3 +29,4 @@ buildNumber.properties
 /logs/
 /jd-qinglong/src/main/resources/application-debuglocal.yml
 /jd-qinglong/src/main/resources/application-debugremote.yml
+/jd-qinglong/src/main/resources/env.properties

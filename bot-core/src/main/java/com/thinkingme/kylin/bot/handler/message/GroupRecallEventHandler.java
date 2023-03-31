@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ import java.util.List;
 public class GroupRecallEventHandler implements EventHandler {
 
     @Override
-    public void handle(JSONObject jsonObject, Bot bot) {
+    public void handle(JSONObject jsonObject, Bot bot) throws InvocationTargetException, IllegalAccessException {
         if (!GroupRecallEvent.isSupport(jsonObject)) {
             return;
         }
