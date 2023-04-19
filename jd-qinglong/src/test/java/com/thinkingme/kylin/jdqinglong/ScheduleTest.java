@@ -22,7 +22,8 @@ public class ScheduleTest {
     @Autowired
     ScheduleService scheduleService;
     @Test
-    public void testNotifyJDCookieDisable(){
-        scheduleService.notifyJDCookieDisable();
+    public void testNotifyJDCookieDisable() throws InterruptedException {
+        Thread.sleep(5000);
+        scheduleService.notifyMaster();
     }
 }

@@ -1,6 +1,5 @@
 package com.thinkingme.kylin.bot.api;
 
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
@@ -15,6 +14,10 @@ public class ApiResult {
 
     @JSONField(name = "retcode")
     private int retCode;
+
+    private String msg;
+
+    private String wording;
 
     private Object data;
 

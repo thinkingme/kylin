@@ -39,7 +39,10 @@ public class QQService {
     public void friendMessageHandler(Friend friend, MessageChain messageChain, String message,Integer id){
         log.info("收到好友消息【{}】:【{}】",friend.getNickname(),message);
         JSONObject jsonObject = null;
-        if(message.contains(JDCookie.KEY)&&message.contains(JDCookie.PIN)){
+        if (message.equals("检查")){
+          scheduleService.notifyJDCookieDisable(false);
+          friend.sendMessage(new TextMessage("检查完毕！"));
+        } else if(message.contains(JDCookie.KEY)&&message.contains(JDCookie.PIN)){
             try {
                 jsonObject = qingLongService.uploadQingLong(String.valueOf(friend.getUserId()), message);
             }catch (Exception e){
@@ -53,14 +56,11 @@ public class QQService {
                 friend.sendMessage(new TextMessage("上传失败！"));
             }
         }else{
-            chatGptService.sendMessage(message,friend);
-//            friend.sendMessage(new TextMessage("你干嘛~ 哎呦！"));
+//            chatGptService.sendMessage(message,friend);
+            friend.sendMessage(new TextMessage("你干嘛~ 哎呦！"));
         }
     }
 
-    public String test() throws Exception {
-        throw new Exception("5456");
-    }
     @TempMessageHandler
     @SneakyThrows
     public void tempFriendMessageHandler(TempFriend friend, MessageChain messageChain, String message, Integer id){
