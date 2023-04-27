@@ -10,6 +10,7 @@
 *.rar
 hs_err_pid*
 *.log
+*.log.*
 *.iml
 *.vm
 .idea/

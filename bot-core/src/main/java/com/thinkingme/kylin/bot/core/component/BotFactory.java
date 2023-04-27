@@ -58,6 +58,7 @@ public class BotFactory implements ApplicationContextAware, DisposableBean {
     }
 
     @SuppressWarnings("all")
+    //注册事件处理
     public static void initHandlerMethod() {
         Map<String, Object> beans = BotFactory.getApplicationContext().getBeansOfType(Object.class);
         for (Object bean : beans.values()) {

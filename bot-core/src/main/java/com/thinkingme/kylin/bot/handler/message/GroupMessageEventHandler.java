@@ -75,7 +75,9 @@ public class GroupMessageEventHandler implements EventHandler {
                         isAt = true;
                     }
                 }
-                if (!isAt) return false;
+                if (!isAt) {
+                    return false;
+                }
             }
             return "none".equals(groupMessageHandler.regex()) || messageChain.toString().matches(groupMessageHandler.regex());
         }, "message");

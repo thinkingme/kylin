@@ -82,7 +82,7 @@ public class QingLongService {
     }
 
     /**
-     * 查询青龙面板的所有环境变量
+     * 查询青龙面板的环境变量
      * @param qlConfig
      * @param searchValue 为空串时查询所有
      * @return

@@ -33,6 +33,7 @@ public class PrivateMessageEvent extends MessageEvent {
 
     public static boolean isSupport(JSONObject jsonObject) {
         return ("message".equals(jsonObject.getString("post_type"))
+                ||"message_sent".equals(jsonObject.getString("post_type"))
                 && "private".equals(jsonObject.getString("message_type")));
     }
 
