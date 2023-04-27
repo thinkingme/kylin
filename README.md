@@ -1,4 +1,4 @@
-# go-cqhttp/java
+# 本版本仅供交流学习使用
 
 > 基于 go-cqhttp 和 java 的 qq 机器人
 
